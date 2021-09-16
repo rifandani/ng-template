@@ -1,0 +1,14 @@
+<section class="home">
+  <div class="home__counter">
+    <p class="home__counter__value">{{ count }}</p>
+
+    <!-- <input class="home__counter__input" type="number" id="inputCount" /> -->
+
+    <div class="home__counter__operation">
+      <button (click)="onIncrement()">Increment</button>
+      <button (click)="onDecrement()">Decrement</button>
+    </div>
+
+    <span *ngIf="count > 5">More than 5</span>
+  </div>
+</section>

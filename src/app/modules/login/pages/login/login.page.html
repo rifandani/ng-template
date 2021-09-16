@@ -1,0 +1,89 @@
+<section class="login">
+  <h1 class="login__title">Reactive Forms Example</h1>
+
+  <!-- NOTE: [formGroup], (ngSubmit), [formControlName] -->
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" class="login__form">
+    <fieldset>
+      <legend>Login To Your Account</legend>
+
+      <label for="email">Email:</label>
+      <input
+        formControlName="email"
+        required
+        type="email"
+        id="email"
+        name="email"
+      />
+
+      <br />
+      <div *ngIf="formEmail.invalid && (formEmail.dirty || formEmail.touched)">
+        <p *ngIf="formEmail.errors?.required" class="text-error">
+          Email is required
+        </p>
+        <p *ngIf="formEmail.errors?.email" class="text-error">
+          Email must be a valid email address
+        </p>
+      </div>
+      <br />
+
+      <label for="password">Password:</label>
+      <input
+        formControlName="password"
+        required
+        minlength="6"
+        type="password"
+        id="password"
+        name="password"
+      />
+
+      <br />
+      <div
+        *ngIf="
+          formPassword.invalid && (formPassword.dirty || formPassword.touched)
+        "
+      >
+        <p *ngIf="formPassword.errors?.required" class="text-error">
+          Password is required
+        </p>
+        <p *ngIf="formPassword.errors?.minlength" class="text-error">
+          Password must be at least 6 characters long
+        </p>
+      </div>
+      <br />
+
+      <input [disabled]="!form.valid" type="submit" value="Submit" />
+    </fieldset>
+
+    <pre>{{ this.form.value | stringify: this.form.value }}</pre>
+    <pre>{{ this.form.status }}</pre>
+  </form>
+
+  <h1 class="login__title">Form Builder Forms Example</h1>
+
+  <!-- NOTE: [formGroup], (ngSubmit), [formControlName] -->
+  <form [formGroup]="formBuilder" (ngSubmit)="onSubmitFB()" class="login__form">
+    <fieldset>
+      <legend>Login To Your Account</legend>
+
+      <label for="email">Email:</label>
+      <input formControlName="email" type="email" id="email" name="email" />
+      <br />
+      <br />
+
+      <label for="password">Password:</label>
+      <input
+        formControlName="password"
+        type="password"
+        id="password"
+        name="password"
+      />
+      <br />
+      <br />
+
+      <input [disabled]="!form.valid" type="submit" value="Submit" />
+    </fieldset>
+
+    <pre>{{ this.formBuilder.value | json }}</pre>
+    <pre>{{ formBuilder.status }}</pre>
+  </form>
+</section>

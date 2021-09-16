@@ -1,0 +1,26 @@
+.home {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.home__counter {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.home__counter__value {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.home__counter__input {
+  width: 50%;
+  margin-bottom: 1rem;
+}
+
+.home__counter__operation {
+  display: flex;
+  gap: 1rem;
+}

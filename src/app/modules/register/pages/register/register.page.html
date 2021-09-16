@@ -1,0 +1,81 @@
+<section class="register">
+  <h1 class="register__title">Template Driven Forms Example</h1>
+
+  <!-- NOTE: [(ngModel)], #fname="ngModel"  -->
+  <!-- inspect the control's state by exporting ngModel to a local template variable -->
+  <form class="register__form">
+    <fieldset>
+      <legend>Register Your Account</legend>
+
+      <label for="fname">First name:</label>
+      <input
+        [(ngModel)]="form.fname"
+        #fname="ngModel"
+        required
+        minlength="3"
+        type="text"
+        id="fname"
+        name="fname"
+      />
+
+      <br />
+      <div *ngIf="fname.invalid && (fname.dirty || fname.touched)">
+        <p *ngIf="fname.errors?.required" class="text-error">
+          First name is required
+        </p>
+        <p *ngIf="fname.errors?.minlength" class="text-error">
+          First name must be at least 3 characters long
+        </p>
+      </div>
+      <br />
+
+      <label for="lname">Last name:</label>
+      <input
+        [(ngModel)]="form.lname"
+        required
+        type="text"
+        id="lname"
+        name="lname"
+      />
+      <br />
+      <br />
+
+      <label for="birthday">Birthday:</label>
+      <input
+        [(ngModel)]="form.birthday"
+        required
+        type="date"
+        id="birthday"
+        name="birthday"
+      />
+      <br />
+      <br />
+
+      <label for="email">Email:</label>
+      <input
+        [(ngModel)]="form.email"
+        required
+        type="email"
+        id="email"
+        name="email"
+      />
+      <br />
+      <br />
+
+      <label for="password">Password:</label>
+      <input
+        [(ngModel)]="form.password"
+        required
+        type="password"
+        id="password"
+        name="password"
+      />
+      <br />
+      <br />
+
+      <input (click)="onSubmit()" type="submit" value="Submit" />
+    </fieldset>
+
+    <pre>{{ form | stringify: form }}</pre>
+  </form>
+</section>
