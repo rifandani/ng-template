@@ -1,0 +1,29 @@
+<nav class="app-navbar">
+  <span class="app-navbar__title">{{ navbarTitle }}</span>
+
+  <!-- This nav gives you links to click, which tells the router which route to use (defined in the routes constant in  AppRoutingModule) -->
+  <ul class="app-navbar__list">
+    <li class="app-navbar__list__item">
+      <a
+        routerLink="/"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: true }"
+        >Home</a
+      >
+    </li>
+    <li class="app-navbar__list__item">
+      <a
+        routerLink="/posts"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: true }"
+        >Posts</a
+      >
+    </li>
+    <li class="app-navbar__list__item">
+      <a routerLink="/register" routerLinkActive="active">Register</a>
+    </li>
+    <li class="app-navbar__list__item">
+      <a routerLink="/login" routerLinkActive="active">Login</a>
+    </li>
+  </ul>
+</nav>

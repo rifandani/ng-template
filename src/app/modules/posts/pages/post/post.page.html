@@ -1,0 +1,11 @@
+<app-navbar
+  navbarTitle="{{(postId | stringLiteral:'Post ') || 'Post Page'}}"
+></app-navbar>
+
+<section class="post">
+  <button (click)="goBack()">⬅ Back</button>
+
+  <h1 class="post__title">Title: {{post?.title || 'Post Title'}}</h1>
+
+  <p class="post__desc">Body: {{post?.body || 'Post Body'}}</p>
+</section>

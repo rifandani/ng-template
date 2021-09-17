@@ -1,0 +1,12 @@
+.post {
+  padding: 0 1rem;
+}
+
+button {
+  padding: 5px 10px;
+  margin-top: 1rem;
+}
+
+button:hover {
+  cursor: pointer;
+}
