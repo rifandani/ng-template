@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
-import POSTS from '@modules/posts/mocks/posts.mock';
-import { Post } from '@modules/posts/interfaces/Post.interface';
+// import POSTS from '@modules/posts/mocks/posts.mock';
+import { Post } from '@modules/posts/interfaces/post.interface';
+import { PostsService } from '@modules/posts/posts.service';
 
 @Component({
   selector: 'app-posts',
@@ -11,28 +11,22 @@ import { Post } from '@modules/posts/interfaces/Post.interface';
   styleUrls: ['./posts.page.css'],
 })
 export class PostsPageComponent implements OnInit {
-  posts = POSTS;
+  posts$?: Observable<Post[]>;
   selectedPost?: Post;
 
-  constructor(
-    private router: Router,
-    private route: ActivatedRoute,
-    private http: HttpClient
-  ) {}
+  constructor(private postsService: PostsService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    const posts$ = this.postsService.getPosts();
+    this.posts$ = posts$;
+  }
 
+  // trackBy like React key
   postById(_index: number, post: Post): number {
     return post.id;
   }
 
   onSelectPost(post: Post): void {
     this.selectedPost = post;
-  }
-
-  goToDetailPost(postId: number): void {
-    this.router.navigate([postId], {
-      relativeTo: this.route,
-    });
   }
 }

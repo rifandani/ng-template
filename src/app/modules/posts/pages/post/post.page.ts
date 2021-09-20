@@ -1,52 +1,54 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Observable, Subscription } from 'rxjs';
 
-import { LoggerService } from '@core/services/logger.service';
-import { Post } from '@modules/posts/interfaces/Post.interface';
-import POSTS from '@modules/posts/mocks/posts.mock';
+import { Post } from '@modules/posts/interfaces/post.interface';
+import { PostsService } from '@modules/posts/posts.service';
 
 @Component({
   templateUrl: './post.page.html',
   styleUrls: ['./post.page.css'],
 })
 export class PostPageComponent implements OnInit, OnDestroy {
+  subs$?: Subscription;
   postId: string = '';
   post?: Post;
 
   constructor(
-    private logger: LoggerService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private postsService: PostsService
   ) {}
 
   ngOnInit(): void {
-    /* --------------- example: http:localhost:4200/posts/2?query=abc&query2=zzzzzzzz --------------- */
-    this.route.params.subscribe((params) => {
+    const sub1$ = this.route.params.subscribe((params) => {
+      /* --------------- example: http:localhost:4200/posts/2?query=abc&query2=zzzzzzzz --------------- */
       // params === {"postId":"2"}
-      this.logger.info('params: ', params);
+      // paramMap === {"params":{"postId":"2"}}
+      // queryParams === {"query":"abc","query2":"zzzzzzzz"}
+      // queryParamMap === {"params":{"query":"abc","query2":"zzzzzzzz"}}
 
       this.postId = params.postId;
-      this.post = POSTS.find((post) => post.id === +params.postId);
+
+      // already unsubsribed by take()
+      this.postsService
+        .getPostById(+this.postId)
+        .subscribe((post) => (this.post = post));
+
+      // this.http
+      //   .get<Post>(`${environment.apiUrl}/posts/${this.postId}`)
+      //   .pipe(take(1)) // take => will auto unsubscribe
+      //   .subscribe((post) => {
+      //     this.post = post;
+      //   });
     });
 
-    this.route.paramMap.subscribe((paramMap) => {
-      // paramMap === {"params":{"postId":"2"}}
-      this.logger.info('paramMap: ', paramMap);
-    });
-
-    this.route.queryParams.subscribe((queryParams) => {
-      // queryParams === {"query":"abc","query2":"zzzzzzzz"}
-      this.logger.info('queryParams: ', queryParams);
-    });
-
-    this.route.queryParamMap.subscribe((queryParamMap) => {
-      // queryParamMap === {"params":{"query":"abc","query2":"zzzzzzzz"}}
-      this.logger.info('queryParamMap: ', queryParamMap);
-    });
+    this.subs$?.add(sub1$);
   }
 
   ngOnDestroy() {
-    // unsubscribe
+    // unsubscribe all subscriptions
+    this.subs$?.unsubscribe();
   }
 
   goBack(): void {

@@ -6,13 +6,13 @@
   <!-- NOTE: trackBy -> uniquely identifies each DOM element and enables Angular to re-render only the modified element -->
   <div class="posts__grid">
     <div
-      *ngFor="let post of posts; trackBy: postById"
+      *ngFor="let post of posts$ | async; let i = index; let even = even; let odd = odd; let first = first; let last = last; trackBy: postById"
       (click)="onSelectPost(post)"
       [class.selected]="post === selectedPost"
+      [ngClass]="{even, odd, first, last}"
       class="posts__grid__item"
     >
-      <p>{{ post.title }}</p>
-      <button (click)="goToDetailPost(post.id)">Detail</button>
+      <app-post-item [post]="post"></app-post-item>
     </div>
   </div>
 </section>
