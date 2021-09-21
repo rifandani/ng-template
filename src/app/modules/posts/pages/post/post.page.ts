@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Observable, Subscription } from 'rxjs';
+import { Subscription } from 'rxjs';
 
 import { Post } from '@modules/posts/interfaces/post.interface';
 import { PostsService } from '@modules/posts/posts.service';
@@ -34,13 +34,6 @@ export class PostPageComponent implements OnInit, OnDestroy {
       this.postsService
         .getPostById(+this.postId)
         .subscribe((post) => (this.post = post));
-
-      // this.http
-      //   .get<Post>(`${environment.apiUrl}/posts/${this.postId}`)
-      //   .pipe(take(1)) // take => will auto unsubscribe
-      //   .subscribe((post) => {
-      //     this.post = post;
-      //   });
     });
 
     this.subs$?.add(sub1$);

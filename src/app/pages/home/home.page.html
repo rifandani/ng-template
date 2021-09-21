@@ -2,15 +2,23 @@
 
 <section class="home">
   <div class="home__counter">
-    <p class="home__counter__value">{{ count }}</p>
+    <p class="home__counter__value">{{ count$ | async }}</p>
 
-    <!-- <input class="home__counter__input" type="number" id="inputCount" /> -->
+    <input
+      class="home__counter__input"
+      type="number"
+      id="inputCount"
+      [(ngModel)]="count"
+    />
 
     <div class="home__counter__operation">
       <button (click)="onIncrement()">Increment</button>
       <button (click)="onDecrement()">Decrement</button>
+      <button (click)="onIncrementByValue()">IncrementByValue</button>
+      <button (click)="onDecrementByValue()">DecrementByValue</button>
+      <button (click)="onReset()">Reset</button>
     </div>
 
-    <span *ngIf="count > 5">More than 5</span>
+    <span *ngIf="(count$ | async)! > 5">More than 5</span>
   </div>
 </section>

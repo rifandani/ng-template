@@ -1,23 +1,43 @@
 import { Component, OnInit } from '@angular/core';
-import { LoggerService } from '@core/services/logger.service';
+import { Observable } from 'rxjs';
+import { Store } from '@ngrx/store';
+
+import { AppState } from '@store/index';
+import {
+  DECREMENT,
+  DECREMENT_BY_VALUE,
+  INCREMENT,
+  INCREMENT_BY_VALUE,
+  RESET,
+} from '@store/actions/counter.action';
 
 @Component({
   templateUrl: './home.page.html',
   styleUrls: ['./home.page.css'],
 })
 export class HomePageComponent implements OnInit {
-  count: number = 0;
+  count$: Observable<number>;
+  count: number = 1;
 
-  constructor(private logger: LoggerService) {}
+  constructor(private store: Store<AppState>) {
+    this.count$ = store.select('count');
+  }
 
   ngOnInit(): void {}
 
   onIncrement(): void {
-    this.count++;
-    this.logger.info(`onIncrement() method called`);
+    this.store.dispatch(INCREMENT());
+  }
+  onIncrementByValue(): void {
+    this.store.dispatch(INCREMENT_BY_VALUE({ value: this.count }));
   }
   onDecrement(): void {
-    this.count--;
-    this.logger.info(`onDecrement() method called`);
+    this.store.dispatch(DECREMENT());
+  }
+  onDecrementByValue(): void {
+    this.store.dispatch(DECREMENT_BY_VALUE({ value: this.count }));
+  }
+  onReset(): void {
+    this.store.dispatch(RESET());
   }
 }

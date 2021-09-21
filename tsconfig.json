@@ -18,12 +18,13 @@
     "module": "es2020",
     "lib": ["es2018", "dom"],
     "paths": {
+      "@environment/*": ["src/environments/*"],
       "@core/*": ["src/app/core/*"],
       "@modules/*": ["src/app/modules/*"],
       "@shared/*": ["src/app/shared/*"],
-      "@environment/*": ["src/environments/*"],
       "@features/*": ["src/app/features/*"],
-      "@pages/*": ["src/app/pages/*"]
+      "@pages/*": ["src/app/pages/*"],
+      "@store/*": ["src/app/store/*"]
     }
   },
   "angularCompilerOptions": {
