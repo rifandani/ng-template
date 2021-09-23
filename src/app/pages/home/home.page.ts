@@ -13,7 +13,7 @@ import {
 
 @Component({
   templateUrl: './home.page.html',
-  styleUrls: ['./home.page.css'],
+  styleUrls: ['./home.page.scss'],
 })
 export class HomePageComponent implements OnInit {
   count$: Observable<number>;

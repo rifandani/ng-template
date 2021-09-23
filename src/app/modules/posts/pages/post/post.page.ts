@@ -7,7 +7,7 @@ import { PostsService } from '@modules/posts/posts.service';
 
 @Component({
   templateUrl: './post.page.html',
-  styleUrls: ['./post.page.css'],
+  styleUrls: ['./post.page.scss'],
 })
 export class PostPageComponent implements OnInit, OnDestroy {
   subs$?: Subscription;

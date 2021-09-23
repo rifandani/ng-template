@@ -3,6 +3,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { AppRoutingModule } from './app-routing.module';
 import { CoreModule } from '@core/core.module';
@@ -21,6 +23,7 @@ import { NotFoundPageComponent } from '@pages/not-found/not-found.page';
   declarations: [AppComponent, NotFoundPageComponent, HomePageComponent],
   // for modules
   imports: [
+    SharedModule,
     StoreModule.forRoot(reducers, {
       metaReducers,
     }),
@@ -30,10 +33,11 @@ import { NotFoundPageComponent } from '@pages/not-found/not-found.page';
       autoPause: true, // Pauses recording actions and state changes when the extension window is not open
     }),
     StoreRouterConnectingModule.forRoot(), // uses MinimalRouterStateSerializer by default
+    BrowserAnimationsModule, // angular-material animations
+    FlexLayoutModule, // angular/flex-layout
     BrowserModule, // this module already exports CommonModule, so we dont need to import CommonModule manually
     AppRoutingModule,
     CoreModule,
-    SharedModule,
     LoginModule, // lazy-load, need to re-import FormsModule or SharedModule
     RegisterModule, // lazy-load, need to re-import FormsModule or SharedModule
   ],

@@ -9,7 +9,7 @@ import {
 
 @Component({
   templateUrl: './login.page.html',
-  styleUrls: ['./login.page.css'],
+  styleUrls: ['./login.page.scss'],
 })
 export class LoginPageComponent implements OnInit {
   // using reactive forms (FormControll)

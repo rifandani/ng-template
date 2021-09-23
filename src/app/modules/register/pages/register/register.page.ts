@@ -3,7 +3,7 @@ import { IRegister } from '@modules/register/interfaces/register.interface';
 
 @Component({
   templateUrl: './register.page.html',
-  styleUrls: ['./register.page.css'],
+  styleUrls: ['./register.page.scss'],
 })
 export class RegisterPageComponent implements OnInit {
   // using template-driven forms (ngModel)

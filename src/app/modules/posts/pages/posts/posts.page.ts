@@ -8,7 +8,7 @@ import { PostsService } from '@modules/posts/posts.service';
 @Component({
   selector: 'app-posts',
   templateUrl: './posts.page.html',
-  styleUrls: ['./posts.page.css'],
+  styleUrls: ['./posts.page.scss'],
 })
 export class PostsPageComponent implements OnInit {
   posts$?: Observable<Post[]>;

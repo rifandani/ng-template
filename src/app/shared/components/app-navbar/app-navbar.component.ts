@@ -10,7 +10,7 @@ import {
 @Component({
   selector: 'app-navbar',
   templateUrl: './app-navbar.component.html',
-  styleUrls: ['./app-navbar.component.css'],
+  styleUrls: ['./app-navbar.component.scss'],
   // changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppNavbarComponent implements OnInit, OnChanges {
